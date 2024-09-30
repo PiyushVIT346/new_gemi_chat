@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gem-EI Bot</title>
+    
+    <!-- Link the CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="chat-container">
+        
+        <!-- Button Row for Functionalities -->
+        <div class="button-row">
+            <button class="btn music-btn" onclick="playMusic()">🎵 Music</button>
+            <button class="btn language-btn" onclick="changeLanguage()">Change Language</button>
+            <button class="btn exercise-btn" onclick="suggestExercise()">Exercise/Yoga</button>
+            <button class="btn joke-btn" onclick="tellJoke()">Tell Joke</button>
+        </div>
+
+        <!-- Random Quote Section -->
+        <div id="quote-container" style="margin-top: 20px;">
+            <strong>Random Quote:</strong>
+            <div id="quote">"Believe in yourself! You are capable of amazing things."</div>
+        </div>
+
+        <!-- Mood Selection Popup Modal -->
+        <div id="moodModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>How's your mood?</h3>
+                <select id="moodSelect">
+                    <option value="">Select your mood</option>
+                    <option value="happy">Happy</option>
+                    <option value="sad">Sad</option>
+                    <option value="relaxed">Relaxed</option>
+                    <option value="angry">Angry</option>
+                    <option value="energetic">Energetic</option>
+                </select>
+                <button id="playMusicButton">Play Music</button>
+            </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="container">
+            <h1>Gem-EI Bot</h1>
+            <h3>Helping You Through Stressful Times</h3>
+            
+            <!-- Chat Input Form -->
+            <form action="/" method="POST">
+                <input type="text" name="message" placeholder="Your message..." required>
+                <button type="submit">Chat with Gem-EI</button>
+            </form>
+            
+            <!-- Chat History Display -->
+            <div class="chat-history">
+                {% for chat in history %}
+                    <div class="chat-bubble user-bubble" style="background-color: {{ chat.user_color }};">
+                        <strong>You:</strong> {{ chat.user }}
+                    </div>
+                    <div class="chat-bubble gem-bubble" style="background-color: {{ chat.gem_color }};">
+                        <strong>Gem-EI:</strong> {{ chat.gem }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the JavaScript file -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
